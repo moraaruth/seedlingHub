@@ -1,0 +1,2 @@
+class Seedling < ApplicationRecord
+end
