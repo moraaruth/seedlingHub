@@ -1,3 +1,3 @@
 class SeedlingSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :price, :description
 end

@@ -5,14 +5,19 @@ class FarmersController < ApplicationController
   # retrieves all farmers from the database and assigns them to an instance variable to be used in the view.
   # GET /farmers
   def index
-    @farmers = Farmer.all
+    farmers = Farmer.all
+    render json: farmers
   end
-
   # retrieves a single farmer from the database by ID and assigns it to an instance variable to be used in the view.
   # GET /farmers/1
   def show
-    @farmer = Farmer.find(params[:id])
-  end
+    farmers = Farmer.find_by(id: params[:id])
+    if farmers
+      render json: farmers
+    else
+      render json: { error: "Farmer not found" }, status: :not_found
+    end
+end
 
   # sets up a new Farmer object to be used in the view for creating a new farmer.
   # GET /farmers/new

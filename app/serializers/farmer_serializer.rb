@@ -1,3 +1,3 @@
 class FarmerSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :username, :email
 end
