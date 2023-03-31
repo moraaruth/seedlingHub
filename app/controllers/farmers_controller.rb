@@ -1,5 +1,6 @@
 class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
    #  sets up an authorization filter that requires the user to be an admin to perform certain actions.
   # before_action :authorize_admin, only: [:create, :update, :destroy]
@@ -35,6 +36,29 @@ class FarmersController < ApplicationController
     end
   end
 
+  def destroy
+    farmer = find_farmer
+    farmer.destroy
+    head :no_content
+end
+
+private
+
+def find_farmer
+    Farmer.find(params[:id])
+end
+
+def render_not_found_response
+    render json: { error: "Farmer not found" }, status: :not_found
+end
+
+def render_unprocessable_entity_response(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+end
+
+  
+
+
 
   # # creates a new farmer object using the parameters submitted from the form.
   # # If the farmer creates successfully, the user is redirected to the farmer's show page with a success notice.
@@ -43,8 +67,16 @@ class FarmersController < ApplicationController
 
   def create
       farmers = Farmer.create!(farmers_params)
-      render json: farmers
+      
+        if farmers
+          render json: farmers
+
+        else
+         
+          render json: { errors: farmers.errors.full_messages }, status: :unprocessable_entity
+        end
       end
+      
   end
 
   private
@@ -53,27 +85,11 @@ class FarmersController < ApplicationController
          params.permit(:username, :email)
     end
 
-
- 
-
-
-  
     private
-  
     def farmer_params
       params.require(:farmer).permit(:username, :email)
     end
-
-
-
-  #  deletes an existing farmer object from the database by ID.
-  # The user is then redirected to the index page with a success notice.
-  # DELETE /farmers/1
-  # def destroy
-  #   @farmer = Farmer.find(params[:id])
-  #   @farmer.destroy
-  #   redirect_to farmers_url, notice: 'Farmer was successfully destroyed.'
-  # end
+  
 
   # private
 
