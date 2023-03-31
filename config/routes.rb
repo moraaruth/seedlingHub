@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :seedlings
-  resources :farmers, only: [:new, :index, :create, :show, :edit, :update, :destroy]
+  resources :farmers, only: [:index, :create, :show]
   resources :consumers, only: [:index, :show]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
