@@ -9,8 +9,8 @@ class FarmersController < ApplicationController
     render json: farmers
   end
 
-  # # retrieves a single farmer from the database by ID and assigns it to an instance variable to be used in the view.
-  # # GET /farmers/1
+  # # # retrieves a single farmer from the database by ID and assigns it to an instance variable to be used in the view.
+  # # # GET /farmers/1
   def show
     farmers = Farmer.find_by(id: params[:id])
     if farmers
@@ -21,45 +21,48 @@ class FarmersController < ApplicationController
 
   end
 
+  def update
+    farmer = Farmer.find_by(id: params[:id])
 
-
-  # creates a new farmer object using the parameters submitted from the form.
-  # If the farmer creates successfully, the user is redirected to the farmer's show page with a success notice.
-  # If the farmer fails to create, the new form is rendered with the validation errors displayed.
-  # POST /farmers
-
-  def create
-    farmers = Farmer.create!(farmer_params)
-    render json: farmers
+    if farmer
+      if farmer.update(farmer_params)
+        render json: farmer.as_json(only: [:id, :username, :email])
+      else
+        render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
+      end
+    else
+      render json: { error: "Farmer not found" }, status: :not_found
+    end
   end
 
 
-   private
+  # # creates a new farmer object using the parameters submitted from the form.
+  # # If the farmer creates successfully, the user is redirected to the farmer's show page with a success notice.
+  # # If the farmer fails to create, the new form is rendered with the validation errors displayed.
+  # # POST /farmers
 
-    def farmer_params
+  def create
+      farmers = Farmer.create!(farmers_params)
+      render json: farmers
+      end
+  end
+
+  private
+
+    def farmers_params
          params.permit(:username, :email)
     end
 
-    # def update
-    #   farmer = Farmer.find_by(id: params[:id])
+
+ 
+
+
   
-    #   if farmer
-    #     if farmer.update(farmer_params)
-    #       render json: farmer.as_json(only: [:id, :username, :email])
-    #     else
-    #       render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
-    #     end
-    #   else
-    #     render json: { error: "Farmer not found" }, status: :not_found
-    #   end
-    # end
+    private
   
-    # private
-  
-    # def farmer_params
-    #   params.require(:farmer).permit(:username)
-    # end
-  
+    def farmer_params
+      params.require(:farmer).permit(:username, :email)
+    end
 
 
 
@@ -84,5 +87,5 @@ class FarmersController < ApplicationController
   # This is a security measure to prevent malicious users from submitting unexpected parameters.
   # def farmer_params
   #   params.require(:farmer).permit(:username, :email)
-  # end
-end
+
+
