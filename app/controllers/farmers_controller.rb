@@ -1,107 +1,84 @@
+require 'jwt'
+
 class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-
-   #  sets up an authorization filter that requires the user to be an admin to perform certain actions.
-  # before_action :authorize_admin, only: [:create, :update, :destroy]
+  before_action :authorize_farmers!, only: [:create, :update, :destroy]
 
   def index
     farmers = Farmer.all
     render json: farmers
   end
 
-  # # # retrieves a single farmer from the database by ID and assigns it to an instance variable to be used in the view.
-  # # # GET /farmers/1
   def show
-    farmers = Farmer.find_by(id: params[:id])
-    if farmers
-      render json: farmers
+    farmer = Farmer.find_by(id: params[:id])
+    if farmer
+      render json: farmer
     else
       render json: { error: "Farmer not found" }, status: :not_found
     end
+  end
 
+  def create
+    farmer = Farmer.new(farmers_params)
+    if farmer.save
+      token = JWT.encode({ farmer_id: farmer.id }, 'farmer', 'HS256')
+      render json: { farmer: farmer, token: token }
+    else
+      render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def update
-    farmer = Farmer.find_by(id: params[:id])
-
-    if farmer
-      if farmer.update(farmer_params)
-        render json: farmer.as_json(only: [:id, :username, :email])
-      else
-        render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
-      end
+    farmer = Farmer.find(params[:id])
+    if farmer.update(farmer_params)
+      render json: farmer
     else
-      render json: { error: "Farmer not found" }, status: :not_found
+      render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
   def destroy
-    farmer = find_farmer
-    farmer.destroy
-    head :no_content
-end
-
-private
-
-def find_farmer
-    Farmer.find(params[:id])
-end
-
-def render_not_found_response
-    render json: { error: "Farmer not found" }, status: :not_found
-end
-
-def render_unprocessable_entity_response(invalid)
-    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
-end
-
+    farmer = Farmer.find(params[:id])
+    if farmer.destroy
+      render json: { message: 'Farmer successfully deleted' }
+    else
+      render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
   
-
-
-
-  # # creates a new farmer object using the parameters submitted from the form.
-  # # If the farmer creates successfully, the user is redirected to the farmer's show page with a success notice.
-  # # If the farmer fails to create, the new form is rendered with the validation errors displayed.
-  # # POST /farmers
-
-  def create
-      farmers = Farmer.create!(farmers_params)
-      
-        if farmers
-          render json: farmers
-
-        else
-         
-          render json: { errors: farmers.errors.full_messages }, status: :unprocessable_entity
-        end
-      end
-      
+  private
+  
+  def farmers_params
+    params.permit(:username, :email, :password_digest)
   end
 
-  private
+  def farmer_params
+    params.require(:farmer).permit(:username, :email, :password_digest)
+  end
 
-    def farmers_params
-         params.permit(:username, :email)
+  def authorize_farmers!
+    token = request.headers['Authorization']&.split&.last
+    if token
+      begin
+        payload = JWT.decode(token, 'farmer', true, algorithm: 'HS256')
+        farmer_id = payload[0]['farmer_id']
+        farmer = Farmer.find(farmer_id)
+        if !farmer.is_admin?
+          render json: { error: 'Unauthorized' }, status: :unauthorized
+        end
+      rescue JWT::DecodeError
+        render json: { error: 'Unauthorized' }, status: :unauthorized
+      rescue JWT::VerificationError
+        render json: { error: 'Unauthorized' }, status: :unauthorized
+      end
+    else
+      render json: { error: 'Unauthorized' }, status: :unauthorized
     end
 
-    private
-    def farmer_params
-      params.require(:farmer).permit(:username, :email)
+    # Allow create, update, and destroy actions only
+    unless ['create', 'update', 'destroy'].include?(action_name)
+      render json: { error: 'Forbidden' }, status: :forbidden
     end
-  
-
-  # private
-
-  # This is a private method that checks if the current user is an admin.
-  # If the current user is not an admin, they are redirected to the root_url with an access denied alert.
-  # def authorize_admin
-  #   redirect_to root_url, alert: 'Access denied.' unless current_farmer.admin?
-  # end
-
-  # This is a private method that defines the permitted parameters for creating or updating a farmer.
-  # This is a security measure to prevent malicious users from submitting unexpected parameters.
-  # def farmer_params
-  #   params.require(:farmer).permit(:username, :email)
-
-
+  end
+end

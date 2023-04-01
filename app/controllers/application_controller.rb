@@ -1,5 +1,6 @@
 # In the ApplicationController, define a helper method to retrieve the current user from the session
 class ApplicationController < ActionController::Base
+include ActionController::Cookies
     # protect_from_forgery with: :exception
     # helper_method :current_farmer
     protect_from_forgery with: :null_session,
