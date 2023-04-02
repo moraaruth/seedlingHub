@@ -3,7 +3,7 @@ require 'jwt'
 class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
-  before_action :authorize_farmers!, only: [:create, :update, :destroy]
+  # before_action :authorize_farmers!, only: [:create, :update, :destroy]
 
   def index
     farmers = Farmer.all
