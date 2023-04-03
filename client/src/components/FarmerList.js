@@ -17,10 +17,8 @@ const FarmerList = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Name</th>
+            <th>Username</th>
             <th>Email</th>
-            <th>Phone</th>
-            <th>Location</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -28,10 +26,9 @@ const FarmerList = () => {
           {farmers.map(farmer => (
             <tr key={farmer.id}>
               <td>{farmer.id}</td>
-              <td>{farmer.name}</td>
+              <td>{farmer.username}</td>
               <td>{farmer.email}</td>
-              <td>{farmer.phone}</td>
-              <td>{farmer.location}</td>
+       
               <td>
                 <button>Edit</button>
                 <button>Delete</button>

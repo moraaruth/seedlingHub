@@ -4,11 +4,11 @@ import Navbar from './components/Navbar';
 import FarmerList from './components/FarmerList';
 import ConsumerList from './components/ConsumerList';
 import SeedlingList from './components/SeedlingList';
-// import ConsumerList from './components/ConsumerList';
-// import SeedlingList from './components/SeedlingList';
-// import Footer from './components/Footer';
-// import Login from './components/Login';
-// import Logout from './components/Logout';
+import Footer from './components/Footer';
+import Login from './components/Login';
+import Logout from './components/Logout';
+import Signup from './components/Signup';
+
 
 function App() {
   const [farmers, setFarmers] = useState([]);
@@ -54,6 +54,10 @@ function App() {
       <FarmerList />
       <ConsumerList />
       <SeedlingList />
+      <Login />
+      <Signup />
+      <Logout />
+      <Footer />
     </div>
     // <Router>
     //   <Navbar isLoggedIn={isLoggedIn} />
