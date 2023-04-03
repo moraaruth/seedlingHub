@@ -1,29 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { BrowserRouter, Route } from "react-router-dom";
-import Home from './components/Home';
-import Seedling from './components/Seedling';
-import CartItem from './components/CartItem';
+// import { BrowserRouter} from "react-router-dom";
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Home />
+    <App />
   </React.StrictMode>
 );
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Route path="/">
-      <Home />
-    </Route>
-    <Route path="/seedling">
-      <Seedling />
-    </Route>
-    <Route path="/cartItem">
-      <CartItem />
-    </Route>
-  </BrowserRouter>,
-  document.getElementById("root")
-);
+// ReactDOM.render(
+//   <BrowserRouter>
+//     <App />
+//   </BrowserRouter>,
+//   document.getElementById("root")
+// );
