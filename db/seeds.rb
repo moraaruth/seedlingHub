@@ -5,27 +5,32 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'faker'
 
-10.times do
-    Seedling.create(
-      name: Faker::Food.ingredient,
-      price: Faker::Number.decimal(l_digits: 2),
-      description: Faker::Food.description
-    )
+5.times do
+  Seedling.create(
+    name: Faker::Food.ingredient,
+    price: Faker::Commerce.price(range: 0..50.0, as_string: true),
+    description: Faker::Food.description,
+    farmer_id: rand(1..100) 
+  )
 end
 
-10.times do
-    Consumer.create(
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
-      password_digest: 'password'
-    )
+
+
+5.times do
+  Farmer.create(
+    username: Faker::Name.unique.name,
+    email: Faker::Internet.unique.email,
+    password_digest: Faker::Internet.password(min_length: 8)
+  )
 end
 
-10.times do
-    Farmer.create(
-      username: Faker::Internet.username,
-      email: Faker::Internet.email,
-      password_digest: 'password'
-    )
+5.times do
+  Consumer.create(
+    username: Faker::Internet.unique.username(specifier: 3..8),
+    email: Faker::Internet.unique.email,
+    password_digest: Faker::Internet.password(min_length: 8)
+  )
 end
+

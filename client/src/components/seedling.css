@@ -1,0 +1,38 @@
+.seedling-list-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .seedling-list-heading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .seedling-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .seedling-list-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .seedling-list-item-name {
+    font-weight: bold;
+  }
+  
+  .seedling-list-item-price {
+    color: green;
+  }
+  
+  .seedling-list-item-description {
+    font-style: italic;
+  }
+  

@@ -1,29 +1,92 @@
 import React, { useState } from 'react';
+import { Link,useNavigate } from 'react-router-dom';
+import './Login.css'
 
 const Login = ({ handleLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [state, setState] = useState({
+    username: '',
+    password: '',
+    errors: ''
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // perform login with email and password
-    handleLogin(email, password);
+  const navigate = useNavigate(); // Get navigate function from react-router-dom
+
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setState({
+      ...state,
+      [name]: value
+    });
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const { username, email, password } = state;
+    const farmer = {
+      username: username,
+      email: email,
+      password: password,
+    };
+    fetch('/farmers', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({ farmer }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.logged_in) {
+          handleLogin(data);
+          navigate('/newfile', { state: { farmer: data.farmer} }); // Navigate to /newfile with user data as a prop
+        } else {
+          setState({
+            errors: data.errors,
+          });
+          alert(data.errors)
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
+        }
+      })
+      .catch((error) => console.log('api errors:', error));
+  };
+
+  const { username, email, password } = state;
 
   return (
     <div>
-      <h2>Login</h2>
+      <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
+        <input
+          placeholder="username"
+          type="text"
+          name="username"
+          value={username}
+          onChange={handleChange}
+        />
+        <input
+          placeholder="email"
+          type="text"
+          name="email"
+          value={email}
+          onChange={handleChange}
+        />
+        <input
+          placeholder="password"
+          type="password"
+          name="password"
+          value={password}
+          onChange={handleChange}
+        />
+        <button type="submit">Log In</button>
         <div>
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          or <Link to='/signup'>sign up</Link>
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit">Login</button>
       </form>
+      {state.errors && <div><ul>{state.errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}
     </div>
   );
 };

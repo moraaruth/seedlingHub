@@ -1,37 +1,60 @@
+// import React from "react";
+
+
+// function Navbar() {
+//   const navStyle = {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "center",
+//     backgroundColor: "#333",
+//     color: "#fff",
+//     padding: "10px",
+//   };
+
+//   const listStyle = {
+//     display: "flex",
+//     listStyle: "none",
+//     margin: "0",
+//     padding: "0",
+//   };
+
+//   const listItemStyle = {
+//     marginLeft: "10px",
+//     marginRight: "10px",
+//     fontSize: "20px",
+//   };
+
+//   return (
+   
+    
+//     <nav style={navStyle}>
+     
+//       <ul style={listStyle}>
+//         <li style={listItemStyle}>Home</li>
+//         <li style={listItemStyle}>Farmers</li>
+//         <li style={listItemStyle}>Consumers</li>
+//         <li style={listItemStyle}>Seedlings</li>
+//       </ul>
+//       <ul style={listStyle}><li style={listItemStyle}>Logout</li></ul>
+//     </nav>
+//   );
+// }
+
+// export default Navbar;
 import React from 'react';
+import './Navbar.css'; // Import CSS file for Navbar styles
 
 const Navbar = ({ handleLogout }) => {
   return (
-    <nav style={{ backgroundColor: '#f8f9fa', padding: '1rem' }}>
-      <ul style={{ display: 'flex', justifyContent: 'space-between', listStyle: 'none' }}>
-        <li>
-          <h1 style={{ margin: 0 }}>SeedlingHub</h1>
-        </li>
-        <li>
-          <ul style={{ display: 'flex', listStyle: 'none', margin: 0, padding: 0 }}>
-            <li style={{ marginRight: '1rem' }}>
-              <a href="#farmers">Farmers</a>
-            </li>
-            <li style={{ marginRight: '1rem' }}>
-              <a href="#consumers">Consumers</a>
-            </li>
-            <li style={{ marginRight: '1rem' }}>
-              <a href="#seedlings">Seedlings</a>
-            </li>
-            <li style={{ marginRight: '1rem' }}>
-              <a href="#login">Login</a>
-            </li>
-            <li style={{ marginRight: '1rem' }}>
-              <a href="#signup">Sign up</a>
-            </li>
-            <li>
-              <button onClick={handleLogout} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer', fontSize: 'inherit', textDecoration: 'underline' }}>Logout</button>
-            </li>
-          </ul>
-        </li>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li className="logout-button"><button onClick={handleLogout}>Logout</button></li>
       </ul>
     </nav>
   );
 };
 
 export default Navbar;
+
