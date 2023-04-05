@@ -82,16 +82,15 @@ class FarmersController < ApplicationController
   def index
     farmers = Farmer.all
     render json: farmers, include: :seedlings
+    
   end
   def create
     farmer = Farmer.create!(farmer_params)
-    session[:farmer_id] = farmer.id
+    # session[:farmer_id] = farmer.id
     render json: farmer, status: :created
   end
 
-  # def show
-  #   render json: @current_farmer
-  # end
+
 
     def show
     farmer = Farmer.find_by(id: params[:id])
@@ -102,6 +101,16 @@ class FarmersController < ApplicationController
       render json: { error: "Farmer not found" }, status: :not_found
     end
   end
+
+  def update
+    farmer = Farmer.find(params[:id])
+    if farmer.update(farmer_params)
+      render json: farmer
+    else
+      render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     farmer = Farmer.find(params[:id])
     if farmer.destroy
@@ -115,7 +124,7 @@ class FarmersController < ApplicationController
   private
 
   def farmer_params
-    params.permit(:username, :password, :password_confirmation)
+    params.require(:farmer).permit(:username,   :email, :password, :passwordConfirmation, seedlings: [] )
   end
 
 end

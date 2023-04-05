@@ -42,6 +42,7 @@
 
 // export default Navbar;
 import React from 'react';
+
 import './style.css'; // Import CSS file for Navbar styles
 
 const Navbar = () => {
@@ -49,7 +50,8 @@ const Navbar = () => {
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/services">Contact</a></li>
+        {/* <li><a href="/farmers">Farmers</a></li> */}
+      
        
       </ul>
     </nav>

@@ -109,7 +109,9 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewFile from './components/Newfile';
+// import FarmerList from './components/FarmerList'
 import Footer from './components/Footer'
+import FarmersPage from './components/FarmersPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -118,7 +120,7 @@ function App() {
   useEffect(() => {
     const loginStatus = async () => {
       try {
-        const response = await fetch('http://localhost:3001//login', { 
+        const response = await fetch('/login', { 
           method: 'GET',
           credentials: 'include'
         });
@@ -155,11 +157,13 @@ function App() {
    
         <Routes>
           <Route exact path='/' element={<Home />} />
+          <Route exact path='/farmerspage' element={<FarmersPage />} />
           <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
-          <Route exact path='/signup' element={<Signup handleLogin={handleLogin} />} />
+          <Route exact path='/signup' element={<Signup  />} />
           <Route exact path="/newfile" element={<NewFile user={user} />} />
         </Routes>
       </BrowserRouter>
+      {/* <FarmerList /> */}
       <Footer />
     </div>
   );

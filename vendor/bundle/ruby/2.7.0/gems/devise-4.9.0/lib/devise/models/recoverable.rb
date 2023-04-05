@@ -34,10 +34,10 @@ module Devise
 
       # Update password saving the record and clearing token. Returns true if
       # the passwords are valid and the record was saved, false otherwise.
-      def reset_password(new_password, new_password_confirmation)
+      def reset_password(new_password, new_passwordConfirmation)
         if new_password.present?
           self.password = new_password
-          self.password_confirmation = new_password_confirmation
+          self.passwordConfirmation = new_passwordConfirmation
           save
         else
           errors.add(:password, :blank)

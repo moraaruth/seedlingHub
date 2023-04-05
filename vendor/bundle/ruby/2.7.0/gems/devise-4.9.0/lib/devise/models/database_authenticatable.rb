@@ -36,7 +36,7 @@ module Devise
         after_update :send_password_change_notification, if: :send_password_change_notification?
 
         attr_reader :password, :current_password
-        attr_accessor :password_confirmation
+        attr_accessor :
       end
 
       def initialize(*args, &block)

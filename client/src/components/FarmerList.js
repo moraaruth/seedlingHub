@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import ReactDOM from 'react-dom';
 import SeedlingList from './SeedlingList';
-import "./style.css"
+import "./Farmer.css"
 
 const FarmerList = () => {
  
