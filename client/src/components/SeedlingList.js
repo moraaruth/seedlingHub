@@ -1,5 +1,5 @@
 // import React, { useState, useEffect } from 'react';
-// import "./seedling.css"
+// import "./style.css"
 
 // const SeedlingList = ({ seedlings }) => {
 //   return (

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link,useNavigate } from 'react-router-dom';
-import './Login.css'
+import './style.css'
 
 const Login = ({ handleLogin }) => {
   const [state, setState] = useState({
@@ -16,31 +16,32 @@ const Login = ({ handleLogin }) => {
     const { name, value } = event.target;
     setState({
       ...state,
-      [name]: value
+      [name]: value || ''
     });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const { username, email, password } = state;
-    const farmer = {
+    const user = {
       username: username,
       email: email,
       password: password,
     };
-    fetch('/farmers', {
+    fetch('/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({ farmer }),
+      body: JSON.stringify({ user }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.logged_in) {
           handleLogin(data);
-          navigate('/newfile', { state: { farmer: data.farmer} }); // Navigate to /newfile with user data as a prop
+          navigate('/farmers');
+          // navigate('/newfile', { state: { user: data.user} }); // Navigate to /newfile with user data as a prop
         } else {
           setState({
             errors: data.errors,
@@ -83,7 +84,7 @@ const Login = ({ handleLogin }) => {
         />
         <button type="submit">Log In</button>
         <div>
-          or <Link to='/signup'>sign up</Link>
+           <Link to='/signup'>sign up</Link>
         </div>
       </form>
       {state.errors && <div><ul>{state.errors.map((error) => <li key={error}>{error}</li>)}</ul></div>}

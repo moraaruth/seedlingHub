@@ -42,15 +42,15 @@
 
 // export default Navbar;
 import React from 'react';
-import './Navbar.css'; // Import CSS file for Navbar styles
+import './style.css'; // Import CSS file for Navbar styles
 
-const Navbar = ({ handleLogout }) => {
+const Navbar = () => {
   return (
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/services">Services</a></li>
-        <li className="logout-button"><button onClick={handleLogout}>Logout</button></li>
+        <li><a href="/services">Contact</a></li>
+       
       </ul>
     </nav>
   );

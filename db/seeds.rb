@@ -26,11 +26,3 @@ end
   )
 end
 
-5.times do
-  Consumer.create(
-    username: Faker::Internet.unique.username(specifier: 3..8),
-    email: Faker::Internet.unique.email,
-    password_digest: Faker::Internet.password(min_length: 8)
-  )
-end
-

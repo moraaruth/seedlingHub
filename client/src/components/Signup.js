@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './style.css'
+
 
 const Signup = (props) => {
   const [state, setState] = useState({
