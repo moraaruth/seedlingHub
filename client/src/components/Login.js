@@ -23,7 +23,7 @@ const Login = ({ handleLogin }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const { username, email, password } = state;
-    const user = {
+    const farmer = {
       username: username,
       email: email,
       password: password,
@@ -34,14 +34,14 @@ const Login = ({ handleLogin }) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({ user }),
+      body: JSON.stringify({ farmer }),
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.logged_in) {
           handleLogin(data);
           navigate('/farmers');
-          // navigate('/newfile', { state: { user: data.user} }); // Navigate to /newfile with user data as a prop
+          
         } else {
           setState({
             errors: data.errors,
@@ -93,3 +93,4 @@ const Login = ({ handleLogin }) => {
 };
 
 export default Login;
+

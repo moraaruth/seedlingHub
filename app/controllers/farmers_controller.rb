@@ -78,19 +78,17 @@ class FarmersController < ApplicationController
 
 # end
 
-  # skip_before_action :authorize, only: :create
+  #  skip_before_action :authorize, only: :create
   def index
     farmers = Farmer.all
-    render json: farmers, include: :seedlings
-    
+
+    render json: farmers
   end
   def create
     farmer = Farmer.create!(farmer_params)
-    # session[:farmer_id] = farmer.id
+     session[:farmer_id] = farmer.id
     render json: farmer, status: :created
   end
-
-
 
     def show
     farmer = Farmer.find_by(id: params[:id])
@@ -126,5 +124,15 @@ class FarmersController < ApplicationController
   def farmer_params
     params.require(:farmer).permit(:username,   :email, :password, :passwordConfirmation, seedlings: [] )
   end
+
+  # def authorize
+  #       unless logged_in?
+  #         render json: {
+  #           status: 401,
+  #           errors: ['You must be logged in to access this section']
+  #         }
+  #       end
+  #     end
+    
 
 end

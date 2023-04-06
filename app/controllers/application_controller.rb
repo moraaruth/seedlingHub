@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
 
-      protect_from_forgery with: :null_session,
-      if: Proc.new{|c| c.request.format =~%r{application/json}}
+ protect_from_forgery with: :null_session,
+ if: Proc.new{|c| c.request.format =~%r{application/json}}
 # #     skip_before_action :verify_authenticity_token
 # # helper_method :login!, :logged_in?, :current_user,     :authorized_user?, :logout!, :set_user
 
@@ -27,6 +27,9 @@ class ApplicationController < ActionController::Base
 
 # class ApplicationController < ActionController::API
 #       include ActionController::Cookies
+
+#       # protect_from_forgery with: :null_session,
+#       # if: Proc.new{|c| c.request.format =~%r{application/json}}
     
 #       rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
     
@@ -35,13 +38,15 @@ class ApplicationController < ActionController::Base
 #       private
     
 #       def authorize
-#         @current_farmer = Farmer.find_by(id: session[:farmer_id])
+#        farmer = Farmer.find_by(id: session[:farmer_id])
     
-#         render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_farmer
+#         render json: { errors: ["Not authorized"] }, status: :unauthorized unless farmer
 #       end
     
 #       def render_unprocessable_entity_response(exception)
 #         render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
 #       end
     
-    end
+end
+
+

@@ -116,7 +116,7 @@ const FarmerList = () => {
               <div className="actions">
                 <button className="edit-button" onClick={() => setFormData(farmer)}>Edit</button>
                 <button className="delete-button" onClick={() => handleDelete(farmer.id)}>Delete</button>
-                <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View Seedlings</button>
+                {/* <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View Seedlings</button> */}
               </div>
             </li>
           ))}

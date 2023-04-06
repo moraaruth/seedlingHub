@@ -48,11 +48,9 @@ import './style.css'; // Import CSS file for Navbar styles
 const Navbar = () => {
   return (
     <nav>
-      <ul>
+      <ul style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', width: '100%', listStyle: 'none' }}>
         <li><a href="/">Home</a></li>
-        {/* <li><a href="/farmers">Farmers</a></li> */}
-      
-       
+        <li style={{ marginLeft: 'auto' }}><a href="/">Logout</a></li>
       </ul>
     </nav>
   );

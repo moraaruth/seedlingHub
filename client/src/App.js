@@ -109,13 +109,13 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import NewFile from './components/Newfile';
-// import FarmerList from './components/FarmerList'
+import FarmerList from './components/FarmerList'
 import Footer from './components/Footer'
-import FarmersPage from './components/FarmersPage';
+// import FarmersPage from './components/FarmersPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
+  const [farmer, setFarmer] = useState({});
 
   useEffect(() => {
     const loginStatus = async () => {
@@ -124,7 +124,8 @@ function App() {
           method: 'GET',
           credentials: 'include'
         });
-        const data = await response.json();
+        // const data = await response.json();
+        const data = await response;
         if (data.logged_in) {
           handleLogin(data);
         } else {
@@ -139,36 +140,39 @@ function App() {
 
   const handleLogin = (data) => {
     setIsLoggedIn(true);
-    setUser(data.user);
+    setFarmer(data.farmer);
     alert('Logged In successfully')
   };
 
   const handleLogout = () => {
     setIsLoggedIn(false);
-    setUser({});
+    setFarmer({});
   };
-
-  return (
-    <div>
-      <h2>SeedlingHub</h2>
-       <Navbar />
-    <BrowserRouter>
-   
-   
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/farmerspage' element={<FarmersPage />} />
-          <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
-          <Route exact path='/signup' element={<Signup  />} />
-          <Route exact path="/newfile" element={<NewFile user={user} />} />
-        </Routes>
-      </BrowserRouter>
-      {/* <FarmerList /> */}
-      <Footer />
-    </div>
-  );
+ 
+  if (farmer) {
+    return (
+      <div>
+        <h2>SeedlingHub</h2>
+         <Navbar farmer={farmer} setFarmer={setFarmer} />
+      <BrowserRouter>
+     
+     
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/farmers' element={<FarmerList />} />
+            <Route exact path='/login' element={<Login />} />
+            <Route exact path='/signup' element={<Signup  />} />
+            <Route exact path="/newfile" element={<NewFile farmer={farmer} />} />
+          </Routes>
+        </BrowserRouter>
+        {/* <FarmerList /> */}
+        <Footer />
+      </div>
+    );
+  } else {
+    return <Login onLogin={setFarmer} />;
+  }
 }
-
 export default App;
 // import React, { useState, useEffect } from 'react';
 // import {BrowserRouter, Routes, Route} from 'react-router-dom'

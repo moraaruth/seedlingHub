@@ -8,7 +8,7 @@ function NewFile() {
 
         const checkLoginStatus = async () => {
             try {
-              const response = await fetch('http://localhost:3001/farmers', {
+              const response = await fetch('/farmers', {
                 method: 'GET',
                 credentials: 'include',
               });
@@ -29,7 +29,7 @@ function NewFile() {
         <div>
            <h1>Here</h1>
            <h1 onClick={() => {
-            fetch("http://localhost:3001/logout",{
+            fetch("/logout",{
                 method: 'POST',
                 credentials: 'include',
             })

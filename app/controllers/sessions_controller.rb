@@ -46,15 +46,28 @@
 class SessionsController < ApplicationController
   skip_before_action :authorize, only: :create
 
-  def create
-    farmer = Farmer.find_by(username: params[:username])
-    if farmer&.authenticate(params[:password])
+
+
+def create
+    farmer = Farmer.find_by(email: params[:email])
+    if farmer && farmer.authenticate(params[:password])
       session[:farmer_id] = farmer.id
-      render json: farmer
+      render json: { message: "Logged in successfully" }, status: :ok
     else
-      render json: { errors: ["Invalid username or password"] }, status: :unauthorized
+      render json: { error: "Invalid email or password" }, status: :unauthorized
     end
   end
+
+  def new
+    render json: {
+      message: "Please enter your login details",
+      fields: {
+        email: "",
+        password: ""
+      }
+    }
+  end
+  
 
   def destroy
     session.delete :farmer_id
