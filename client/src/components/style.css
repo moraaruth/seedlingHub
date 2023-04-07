@@ -160,9 +160,10 @@
     background-color: #333;
     height: 50px;
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: center;
     padding: 0 20px;
+ 
   }
   
   ul {
@@ -171,6 +172,7 @@
     padding: 0;
     display: flex;
     align-items: center;
+  
   }
   
   li {
@@ -184,5 +186,14 @@
   
   .logout-button {
     margin-left: 70%
+  }
+  .logout-button {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-size: 14px;
   }
   

@@ -1,92 +1,100 @@
 .farmer-list {
-    margin: 2rem;
-    font-family: sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  form {
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  label {
-    margin: 0.5rem;
-  }
-  
-  input[type="text"] {
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    font-size: 1rem;
-    margin-left: 0.5rem;
-  }
-  input[type="password"] {
-    padding: 0.5rem;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    font-size: 1rem;
-    margin-left: 0.5rem;
-  }
-  
-  button[type="submit"] {
-    margin: 1rem;
-    padding: 0.5rem;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  table {
-    border-collapse: collapse;
-    margin-top: 2rem;
-    width: 100%;
-  }
-  
-  th, td {
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-    text-align: left;
-  }
-  
-  th {
-    background-color: #0077cc;
-    color: white;
-  }
-  
-  .edit-button, .delete-button {
-    margin: 0.2rem;
-    padding: 0.2rem 0.5rem;
-    background-color: #0077cc;
-    color: white;
-    border: none;
-    font-size: 0.8rem;
-    cursor: pointer;
-  }
-  
-  .delete-button {
-    background-color: #cca700;
-  }
-  .farmer-list-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .farmer-card {
-    width: 48%;
-    margin-bottom: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .encrypted-password {
-    display: hidden;
-    -webkit-text-security: disc; /* for Safari */
-    -moz-text-security: disc; /* for Firefox */
-    -ms-text-security: disc; /* for Edge */
-    -text-security: disc; /* for Chrome */
-  }
+.farmer-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 2 * (340px); 
+}
+
+.farmer-list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  height: 340px; 
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button,
+.view-button {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-button {
+  background: #4caf50;
+  border: none;
+}
+
+.delete-button {
+  background: #f44336;
+  border: none;
+}
+
+.view-button {
+  background: #2196f3;
+  border: none;
+}
+
+.add-farmer-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button[type="submit"],
+button[type="button"] {
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #2196f3;
+  border: none;
+  cursor: pointer;
+}

@@ -12,12 +12,18 @@ require 'faker'
     name: Faker::Food.fruits,
     price: Faker::Commerce.price(range: 0..50.0, as_string: true),
     description: Faker::Food.description,
-    farmer_id: rand(1..100) 
+    farmer_id: rand(1..100),
+    planting_season: Faker::Time.between_dates(from: Date.today, to: Date.today + 1.year),
+    growth_duration: Faker::Number.between(from: 30, to: 180),
+    harvest_time: Faker::Time.between(from: Time.now, to: Time.now + 6.months),
+    soil_type: Faker::Hipster.word,
+    water_requirements: Faker::Number.between(from: 1, to: 10),
+    light_requirements: Faker::Number.between(from: 1, to: 10),
+    nutritional_value: Faker::Number.between(from: 1, to: 5)
   )
 end
-
 # Create 5 farmers
-5.times do
+3.times do
   Farmer.create(
     username: Faker::Name.unique.first_name,
     email: Faker::Internet.unique.email,

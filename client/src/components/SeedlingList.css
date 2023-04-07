@@ -1,0 +1,14 @@
+.seedling-grid {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.seedling-grid p {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: left;
+  font-size: 18px;
+ 
+  
+}

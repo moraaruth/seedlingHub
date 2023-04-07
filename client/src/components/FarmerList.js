@@ -51,31 +51,7 @@ const FarmerList = () => {
       .catch(err => console.log(err));
   };
   
- 
-  const handleEdit = (id, farmerData) => {
-    const [username, email, password] = [farmerData.username, farmerData.email, farmerData.password_digest];
-    const updatedData = prompt(`Enter new data for farmer with ID ${id}`, JSON.stringify({ username, email, password }));
-    const { username: newUsername, email: newEmail, password: newPassword } = JSON.parse(updatedData);
-    fetch(`/farmers/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username: newUsername, email: newEmail, password: newPassword })
-    })
-      .then(res => res.json())
-      .then(data => {
-        const updatedFarmers = farmers.map(farmer => {
-          if (farmer.id === data.id) {
-            return data;
-          }
-          return farmer;
-        });
-        setFarmers(updatedFarmers);
-      })
-      .catch(err => console.log(err));
-  };
-  
+
 
   const handleDelete = id => {
     fetch(`/farmers/${id}`, {
@@ -88,7 +64,28 @@ const FarmerList = () => {
       })
       .catch(err => console.log(err));
   };
-
+  
+  const handleEdit = (id, updatedData) => {
+    fetch(`/farmers/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updatedData),
+    })
+    .then(res => res.json())
+    .then(data => {
+      setFarmers(prevFarmers => {
+        const index = prevFarmers.findIndex(farmer => farmer.id === id);
+        const updatedFarmers = [...prevFarmers];
+        updatedFarmers[index] = data;
+        return updatedFarmers;
+      });
+    
+    })
+    .catch(err => console.log(err));
+  };
+  
   const handleViewSeedlings = id => {
     fetch(`/farmers/${id}/seedlings`)
       .then(res => res.json())
@@ -105,24 +102,6 @@ const FarmerList = () => {
   return (
     <div className="farmer-list">
       <h2>List of Farmers</h2>
-  
-      <div className="farmer-list-container">
-        <ul className="farmer-list-items">
-          {farmers.map(farmer => (
-            <li key={farmer.id} className="farmer-list-item">
-              <h3>{farmer.username}</h3>
-              <p>Email: {farmer.email}</p>
-              <p className="encrypted-password">Password: {farmer.password_digest}</p>
-              <div className="actions">
-                <button className="edit-button" onClick={() => setFormData(farmer)}>Edit</button>
-                <button className="delete-button" onClick={() => handleDelete(farmer.id)}>Delete</button>
-                {/* <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View Seedlings</button> */}
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-  
       <div className="add-farmer-form">
         <h3>{formData.id ? 'Edit Farmer' : 'Add Farmer'}</h3>
         <form onSubmit={handleSubmit}>
@@ -142,6 +121,28 @@ const FarmerList = () => {
           {formData.id && <button type="button" onClick={() => setFormData({})}>Cancel</button>}
         </form>
       </div>
+  
+      <div className="farmer-list-container">
+   
+        <ul className="farmer-list-items">
+          {farmers.map((farmer => (
+            <li key={farmer.id} className="farmer-list-item">
+           
+              <h3>{farmer.username}</h3>
+              <p>Email: {farmer.email}</p>
+              <p className="encrypted-password">Password: {farmer.password_digest}</p>
+              <div className="actions">
+             
+                <button className="edit-button" onClick={() => handleEdit(farmer.id)}>Edit</button>
+                <button className="delete-button" onClick={() => handleDelete(farmer.id)}>Delete</button>
+                <br/><br/>
+                <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View </button>                </div> 
+            </li>
+          )))}
+        </ul>
+      </div>
+  
+     
     </div>
   );
   
