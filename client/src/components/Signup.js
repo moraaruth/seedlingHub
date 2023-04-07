@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = (props) => {
   const navigate = useNavigate();
@@ -9,7 +8,6 @@ const Signup = (props) => {
     email: '',
     password: '',
     password_confirmation: '',
-   
   });
 
   const handleChange = (event) => {
@@ -24,7 +22,7 @@ const Signup = (props) => {
       username: username,
       email: email,
       password: password,
-      password_confirmation: password_confirmation
+      password_confirmation: password_confirmation,
     };
     fetch('/farmers', {
       method: 'POST',
@@ -32,20 +30,19 @@ const Signup = (props) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({ farmer })
+      body: JSON.stringify({ farmer }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.status === 'created') {
           props.handleLogin(data);
-          navigate("/farmer")
+          navigate('/farmer');
         } else {
           setState({ ...state, errors: data.errors });
         }
       })
-      .catch(error => console.log('api errors:', error));
+      .catch((error) => console.log('api errors:', error));
   };
-
 
   const handleErrors = () => {
     return (
@@ -60,7 +57,7 @@ const Signup = (props) => {
   };
 
   return (
-    <div>
+    <div style={{ margin: '50px auto', maxWidth: '500px' }}>
       <h1>Sign Up</h1>
       <form onSubmit={handleSubmit}>
         <input
