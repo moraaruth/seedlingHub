@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
-import ReactDOM from 'react-dom';
-import SeedlingList from './SeedlingList';
+import {useNavigate} from 'react-router-dom'
 import "./Farmer.css"
 
 const FarmerList = () => {
+const navigate = useNavigate();
  
   const [farmers, setFarmers] = useState([]);
   const [formData, setFormData] = useState({
@@ -85,19 +84,8 @@ const FarmerList = () => {
     })
     .catch(err => console.log(err));
   };
-  
-  const handleViewSeedlings = id => {
-    fetch(`/farmers/${id}/seedlings`)
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        // Render SeedlingList component inside a modal
-        const modal = document.createElement('div');
-        modal.className = 'modal';
-        document.body.appendChild(modal);
-        ReactDOM.render(<SeedlingList seedlings={data} />, modal);
-      })
-      .catch(err => console.log(err));
+  const handleViewSeedlings = (id) => {
+    navigate(`/farmer/${id}`);
   };
   return (
     <div className="farmer-list">
@@ -136,7 +124,9 @@ const FarmerList = () => {
                 <button className="edit-button" onClick={() => handleEdit(farmer.id)}>Edit</button>
                 <button className="delete-button" onClick={() => handleDelete(farmer.id)}>Delete</button>
                 <br/><br/>
-                <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View </button>                </div> 
+                <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View</button>
+
+                 </div> 
             </li>
           )))}
         </ul>

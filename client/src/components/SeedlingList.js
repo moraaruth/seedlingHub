@@ -1,49 +1,4 @@
-// import React from 'react';
-// import './SeedlingList.css';
 
-// const SeedlingList = ({ seedlings }) => {
-//   return (
-//     <div className="seedling-list">
-//       <h2>Seedlings</h2>
-//       <table>
-//         <thead>
-//           <tr>
-//             <th>Name</th>
-//             <th>Description</th>
-//             <th>Price</th>
-//             <th>Planting Season</th>
-//             <th>Growth Duration</th>
-//             <th>Harvest Time</th>
-//             <th>Soil Type</th>
-//             <th>Water Requirements</th>
-//             <th>Light Requirements</th>
-//             <th>Nutritional Value</th>
-//           </tr>
-//         </thead>
-//         {seedlings && seedlings.length > 0 && (
-//           <tbody>
-//             {seedlings.map((seedling) => (
-//               <tr key={seedling.id}>
-//                 <td>{seedling.name}</td>
-//                 <td>{seedling.description}</td>
-//                 <td>{seedling.price}</td>
-//                 <td>{seedling.planting_season}</td>
-//                 <td>{seedling.growth_duration}</td>
-//                 <td>{seedling.harvest_time}</td>
-//                 <td>{seedling.soil_type}</td>
-//                 <td>{seedling.water_requirements}</td>
-//                 <td>{seedling.light_requirements}</td>
-//                 <td>{seedling.nutritional_value}</td>
-//               </tr>
-//             ))}
-//           </tbody>
-//         )}
-//       </table>
-//     </div>
-//   );
-// };
-
-// export default SeedlingList;import React from 'react';
 import './SeedlingList.css';
 
 const SeedlingList = ({ seedlings }) => {
