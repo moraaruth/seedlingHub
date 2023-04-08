@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     skip_before_action :verify_authenticity_token
-    helper_method :login!, :logged_in?, :current_farmer,     :authorized_farmer?, :logout!, :set_farmer
+    helper_method :login!, :logged_in?, :current_farmer, :authorized_farmer?, :logout!, :set_farmer
 
  protect_from_forgery with: :null_session,
  if: Proc.new{|c| c.request.format =~%r{application/json}}

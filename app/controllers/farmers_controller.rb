@@ -6,23 +6,20 @@ class FarmersController < ApplicationController
 
 before_action :require_login, except: [:create]
 
+
 def index
   farmers = Farmer.all
-   render json:   farmers
+    if farmers
+        render json: farmers
+    else
+        render json: {
+        status: 500,
+        errors: ['no farmers found']
+    }
+    end
+
 end
-    # def index
-    #     @farmers = Farmer.all
-    #        if @farmers
-    #           render json: {
-    #           users: @farmers
-    #        }
-    #       else
-    #           render json: {
-    #           status: 500,
-    #           errors: ['no farmers found']
-    #       }
-    #      end
-    # end
+
 def show
        farmers = Farmer.find(params[:id])
            if farmers
@@ -34,16 +31,10 @@ def show
               status: 500,
               errors: ['farmer not found']
             }
-           end
-      end
-
-      def destroy
-        farmers = find_farmer
-        farmers.destroy
-        head :no_content
     end
-    
-      
+end
+
+
       def create
         @farmer = Farmer.new(farmer_params)
             if @farmer.save
@@ -74,20 +65,23 @@ def show
       end
     end
 
-
-  #     def destroy
-  #       logout!
-  #       render json: {
-  #         status: 200,
-  #         logged_out: true
-  #       }
-  # end
+    def destroy
+      logout!
+      @farmer = Farmer.find(params[:id])
+      @farmer.destroy
+      render json: { message: "Farmer deleted and user logged out" }
+    end
+  
 
 
 private
 
 def find_farmer
   Farmer.find(params[:id])
+end
+
+def render_not_found_response
+  render json: { error: 'Not found' }, status: :not_found
 end
       
      def farmer_params
