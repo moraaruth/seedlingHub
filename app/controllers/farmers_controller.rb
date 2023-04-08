@@ -4,7 +4,7 @@ class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
 
-# before_action :require_login, except: [:create]
+before_action :require_login, except: [:create]
 
 def index
   farmers = Farmer.all
@@ -36,6 +36,13 @@ def show
             }
            end
       end
+
+      def destroy
+        farmers = find_farmer
+        farmers.destroy
+        head :no_content
+    end
+    
       
       def create
         @farmer = Farmer.new(farmer_params)
@@ -53,29 +60,35 @@ def show
            end
      end
 
-    # def update
-    #   farmer = Farmer.find_by(id: params[:id])
+    def update
+      farmer = Farmer.find_by(id: params[:id])
   
-    #   if farmer
-    #     if farmer.update(farmer_params)
-    #       render json: farmer.as_json(only: [:id, :username])
-    #     else
-    #       render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
-    #     end
-    #   else
-    #     render json: { error: "Farmer not found" }, status: :not_found
-    #   end
-    # end
+      if farmer
+        if farmer.update(farmer_params)
+          render json: farmer.as_json(only: [:id, :username])
+        else
+          render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
+        end
+      else
+        render json: { error: "Farmer not found" }, status: :not_found
+      end
+    end
 
 
-      def destroy
-        logout!
-        render json: {
-          status: 200,
-          logged_out: true
-        }
-  end
+  #     def destroy
+  #       logout!
+  #       render json: {
+  #         status: 200,
+  #         logged_out: true
+  #       }
+  # end
+
+
 private
+
+def find_farmer
+  Farmer.find(params[:id])
+end
       
      def farmer_params
          params.require(:farmer).permit(:username, :password, :password_confirmation)

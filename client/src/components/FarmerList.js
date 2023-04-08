@@ -7,6 +7,7 @@ const navigate = useNavigate();
  
   const [farmers, setFarmers] = useState([]);
   const [formData, setFormData] = useState({
+    id: '',
     username: '',
     email: '',
     password: ''
@@ -31,8 +32,14 @@ const navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
-    fetch('/farmers', {
-      method: 'POST',
+    let url = '/farmers';
+    let method = 'POST';
+    if (formData.id) {
+      url = `/farmers/${formData.id}`;
+      method = 'PATCH';
+    }
+    fetch(url, {
+      method: method,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -40,8 +47,18 @@ const navigate = useNavigate();
     })
       .then(res => res.json())
       .then(data => {
-        setFarmers([...farmers, data]);
+        if (method === 'POST') {
+          setFarmers([...farmers, data]);
+        } else {
+          setFarmers(prevFarmers => {
+            const index = prevFarmers.findIndex(farmer => farmer.id === formData.id);
+            const updatedFarmers = [...prevFarmers];
+            updatedFarmers[index] = data;
+            return updatedFarmers;
+          });
+        }
         setFormData({
+          id: '',
           username: '',
           email: '',
           password: ''
@@ -50,8 +67,6 @@ const navigate = useNavigate();
       .catch(err => console.log(err));
   };
   
-
-
   const handleDelete = id => {
     fetch(`/farmers/${id}`, {
       method: 'DELETE'
@@ -63,30 +78,21 @@ const navigate = useNavigate();
       })
       .catch(err => console.log(err));
   };
+  const handleEdit = (id) => {
+    const farmerToEdit = farmers.find(farmer => farmer.id === id);
+    setFormData({
+      id: farmerToEdit.id,
+      username: farmerToEdit.username,
+      email: farmerToEdit.email,
+      password: farmerToEdit.password_digest
+    });
+  };
   
-  const handleEdit = (id, updatedData) => {
-    fetch(`/farmers/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(updatedData),
-    })
-    .then(res => res.json())
-    .then(data => {
-      setFarmers(prevFarmers => {
-        const index = prevFarmers.findIndex(farmer => farmer.id === id);
-        const updatedFarmers = [...prevFarmers];
-        updatedFarmers[index] = data;
-        return updatedFarmers;
-      });
-    
-    })
-    .catch(err => console.log(err));
-  };
+  
   const handleViewSeedlings = (id) => {
-    navigate(`/farmer/${id}`);
+    navigate(`/farmer/${id}/seedlings`);
   };
+  
   return (
     <div className="farmer-list">
       <h2>List of Farmers</h2>
@@ -121,7 +127,8 @@ const navigate = useNavigate();
               <p className="encrypted-password">Password: {farmer.password_digest}</p>
               <div className="actions">
              
-                <button className="edit-button" onClick={() => handleEdit(farmer.id)}>Edit</button>
+              <button className="edit-button" onClick={() => handleEdit(farmer.id, formData)}>Edit</button>
+
                 <button className="delete-button" onClick={() => handleDelete(farmer.id)}>Delete</button>
                 <br/><br/>
                 <button className="view-button" onClick={() => handleViewSeedlings(farmer.id)}>View</button>

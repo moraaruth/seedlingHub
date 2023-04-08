@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './style.css';
 
 const Login = ({ handleLogin }) => {
   const [state, setState] = useState({
@@ -50,10 +51,11 @@ const Login = ({ handleLogin }) => {
   const { username, email, password } = state;
 
   return (
-    <div style={{ marginLeft: '20px' }}>
+    <div className="login-container">
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
         <input
+          className="login-input"
           placeholder="username"
           type="text"
           name="username"
@@ -61,6 +63,7 @@ const Login = ({ handleLogin }) => {
           onChange={handleChange}
         />
         <input
+          className="login-input"
           placeholder="email"
           type="text"
           name="email"
@@ -68,19 +71,20 @@ const Login = ({ handleLogin }) => {
           onChange={handleChange}
         />
         <input
+          className="login-input"
           placeholder="password"
           type="password"
           name="password"
           value={password}
           onChange={handleChange}
         />
-        <button type="submit">Log In</button>
+        <button className="login-btn" type="submit">Log In</button>
         <div>
-          or <Link to='/signup'>sign up</Link>
+          or <Link className="login-link" to='/signup'>sign up</Link>
         </div>
       </form>
       {state.errors && (
-        <div>
+        <div className="login-errors">
           <ul>
             {state.errors.map((error) => (
               <li key={error}>{error}</li>

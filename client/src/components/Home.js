@@ -8,7 +8,7 @@ function Home() {
     alignItems: 'center',
     flexDirection: 'column',
     justifyContent: 'center',
-    height: 'calc(100vh - 90px)', // Set height to fill entire viewport minus navbar height
+    height: 'calc(100vh - 90px)', 
     backgroundImage: 'url("https://images.pexels.com/photos/9324330/pexels-photo-9324330.jpeg?auto=compress&cs=tinysrgb&w=600")', // Replace with direct link to image
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -42,6 +42,7 @@ function Home() {
     padding: '10px 20px',
     backgroundColor: 'blue',
     borderRadius: '5px',
+   
   };
 
   return (

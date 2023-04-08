@@ -1,14 +1,88 @@
-.seedling-grid {
-  display: flex;
-  flex-wrap: wrap;
+.seedling-list {
+  margin: 2rem;
 }
 
-.seedling-grid p {
-  width: 50%;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: left;
-  font-size: 18px;
- 
-  
+h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.seedling-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.seedling-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.seedling-card:hover {
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.seedling-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.seedling-details {
+  margin-top: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+label {
+  font-weight: bolder;
+}
+
+.price-label {
+  color: #9b4dca;
+}
+
+.planting-season-label {
+  color: #50c878;
+}
+
+.growth-duration-label {
+  color: #ffa500;
+}
+
+.harvest-time-label {
+  color: #6495ed;
+}
+
+.soil-type-label {
+  color: #008000;
+}
+
+.water-requirements-label {
+  color: #4169e1;
+}
+
+.light-requirements-label {
+  color: #ffff00;
+}
+
+.nutritional-value-label {
+  color: #d2691e;
 }

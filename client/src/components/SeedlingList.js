@@ -1,7 +1,8 @@
-
+import {useNavigate } from 'react-router-dom';
 import './SeedlingList.css';
 
 const SeedlingList = ({ seedlings }) => {
+  const navigate = useNavigate(); 
   return (
     <div className="seedling-list">
       <h2>Seedlings</h2>
@@ -32,6 +33,19 @@ const SeedlingList = ({ seedlings }) => {
               Nutritional Value: {seedling.nutritional_value}
             </p>
           ))}
+           <h1  className="logout-button" onClick={() => {
+            fetch("/logout",{
+                method: 'POST',
+                credentials: 'include',
+            })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                navigate('/login');
+
+            })
+           }}>Logout</h1>
+             
         </div>
       )}
     </div>
