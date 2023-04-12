@@ -22,7 +22,7 @@
 Seedlings belong to a Farmer.
 Farmer has many Seedlings
 ```
-![ERD](erd.pdf)
+![Untitled (2)](https://user-images.githubusercontent.com/99640531/231582870-f3f9d020-3266-4363-a559-a93606e44512.png)
 
 ### Getting Started
 

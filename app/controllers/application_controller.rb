@@ -13,9 +13,9 @@ def logged_in?
       !!session[:farmer_id]
 end
 def current_farmer
-      @current_farmer ||= Farmer.find(session[:farmer_id]) if session[:farmer_id]
-end
-def authorized_farmer?
+      @current_farmer ||= Farmer.find_by(id: session[:farmer_id])
+    end
+def authorize
        @farmer == current_farmer
 end
 def logout!

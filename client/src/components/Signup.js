@@ -58,9 +58,10 @@ const Signup = (props) => {
     })
     .then((r) => {
       console.log(user)
+      navigate('/farmer');
       if (r.ok) {
         r.json().then((user) => setFarmers(user));
-        navigate('/farmer');
+      
       }
     });
       // .then(response => response.json())
