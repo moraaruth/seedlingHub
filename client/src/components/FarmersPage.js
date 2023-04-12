@@ -70,25 +70,41 @@ function FarmersPage() {
       ];
       
   const [seedlings, setSeedlings] = useState([]);
+  const [farmers, setFarmers] = useState([]);
+
+//   useEffect(() => {
+//    fetch('/farmers')
+//      .then(res => res.json())
+//      .then(farmers => setFarmers(farmers))
+//  }, []);
+
+  useEffect(() => {
+    fetch('/farmers') // replace with your backend API endpoint
+      .then(response => response.json())
+      .then(data => setFarmers(data))
+      .catch(error => console.log(error));
+  }, []);
+
+    // useEffect(() => {
 
 
-    useEffect(() => {
 
-        const checkFarmers = async () => {
-            try {
-              const response = await fetch('/farmers', {
-                method: 'GET',
-                credentials: 'include',
-              });
-              const data = await response.json();
-            console.log(data)
-            } catch (error) {
-              console.log('API error:', error);
-            }
-          };
-          checkFarmers();
+    //     const checkFarmers = async () => {
+    //         try {
+    //           const response = await fetch('/farmers', {
+    //             method: 'GET',
+    //             credentials: 'include',
+    //           });
+    //           const data = await response.json();
+            
+    //         console.log(data)
+    //         } catch (error) {
+    //           console.log('API error:', error);
+    //         }
+    //       };
+    //       checkFarmers();
 
-    }, [])
+    // }, [])
 
     const navigate = useNavigate(); 
     useEffect(() => {

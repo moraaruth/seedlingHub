@@ -1,24 +1,39 @@
-# README
+# SeedlingHub
+- This is a web application for marketing seedlings.It allows you to create, read, update and delete farmers.With your list of farmers, you are able to see the list of seedlings they have and share information about the seedlings for marketing purposes.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Features
+#### FarmersList
 
-Things you may want to cover:
+- Create a new farmer
+- Update an existing farmer
+- View a farmer with the seedlings they have
+- Delete a farmer
 
-* Ruby version
+### Techologies Used
+- This application was built using the following technologies
 
-* System dependencies
+- Ruby on Rails
+- React
+- CSS
 
-* Configuration
+### Models
+- i have two models
+```ruby
+Seedlings belong to a Farmer.
+Farmer has many Seedlings
+```
+![ERD](erd.pdf)
 
-* Database creation
+### Getting Started
 
-* Database initialization
+- To get started with this application, you should have Ruby and Rails installed on your local machine.
 
-* How to run the test suite
+  - Clone the repository to your local machine.
+  - Navigate to the project directory and run bundle install to install the necessary gems.
+  - Run rails db:create and rails db:migrate to create and migrate the database.
+  - Navigate to the client directory and run npm install to install the necessary npm packages.
+  - Run rails s to start the Rails server and npm start to start the React server
+  - Run `foreman start -f Procfile.dev` to start the React server
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### License
+This project is licensed under the MIT License. See the LICENSE file for more details.

@@ -214,8 +214,6 @@ function App() {
           <Route path="/farmer/:id/seedlings" element={<SeedlingList seedlings={seedlingList} />} /> 
 
 
-
-
         </Routes>    
         <Footer />
       </BrowserRouter>

@@ -64,7 +64,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
-  gem "jwt", "~> 2.2"
   gem 'rack-cors'
-
+  
 end

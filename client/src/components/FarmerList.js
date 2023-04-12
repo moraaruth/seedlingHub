@@ -63,6 +63,10 @@ const navigate = useNavigate();
           email: '',
           password: ''
         });
+        setMessage('Farmer added successfully!');
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
       })
       .catch(err => console.log(err));
   };
@@ -75,6 +79,10 @@ const navigate = useNavigate();
         const updatedFarmers = farmers.filter(farmer => farmer.id !== id);
         setFarmers(updatedFarmers);
         setMessage('Farmer deleted successfully!');
+        setTimeout(() => {
+          setMessage('');
+        }, 3000);
+        
       })
       .catch(err => console.log(err));
   };
@@ -96,6 +104,8 @@ const navigate = useNavigate();
   return (
     <div className="farmer-list">
       <h2>List of Farmers</h2>
+      {message && <div className="alert">{message}</div>}
+
       <div className="add-farmer-form">
         <h3>{formData.id ? 'Edit Farmer' : 'Add Farmer'}</h3>
         <form onSubmit={handleSubmit}>
@@ -115,9 +125,9 @@ const navigate = useNavigate();
           {formData.id && <button type="button" onClick={() => setFormData({})}>Cancel</button>}
         </form>
       </div>
-  
-      <div className="farmer-list-container">
    
+  
+      <div className="farmer-list-container">   
         <ul className="farmer-list-items">
           {farmers.map((farmer => (
             <li key={farmer.id} className="farmer-list-item">
