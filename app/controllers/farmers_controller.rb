@@ -2,7 +2,7 @@ class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
-  # before_action :authorize
+  before_action :require_login, except: [:create]
 
   def index
     farmers = Farmer.all
@@ -13,14 +13,22 @@ class FarmersController < ApplicationController
     farmer = Farmer.find(params[:id])
     render json: farmer
   end
-  def create 
-    farmer = Farmer.new(farmer_params)    
-      if farmer.save          
-          render json: farmer
-    else    
-      render json: { errors: farmer.errors.full_messages }, status: :unprocessable_entity
-    end
-  end
+
+  def create
+    @farmer = Farmer.new(farmer_params)
+        if @farmer.save
+            login!  
+            render json: {
+            status: :created,
+            farmer: @farmer
+        }
+       else 
+           render json: {
+           status: 500,
+           errors: @farmer.errors.full_messages
+       }
+       end
+ end
   
   def update
     farmer = Farmer.find(params[:id])
@@ -48,7 +56,13 @@ class FarmersController < ApplicationController
     params.require(:farmer).permit(:username, :email, :password, :password_confirmation )
   end
 
-  # def authorize
-  #   return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :farmer_id
-  # end
+
+  def require_login
+    unless logged_in?
+      render json: {
+        status: 401,
+        errors: ['You must be logged in to access this section']
+      }
+    end
+  end
 end

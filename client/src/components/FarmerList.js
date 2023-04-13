@@ -3,6 +3,8 @@ import {useNavigate} from 'react-router-dom'
 import "./Farmer.css"
 
 const FarmerList = () => {
+
+  
 const navigate = useNavigate();
  
   const [farmers, setFarmers] = useState([]);
@@ -104,8 +106,6 @@ const navigate = useNavigate();
   return (
     <div className="farmer-list">
       <h2>List of Farmers</h2>
-      {message && <div className="alert">{message}</div>}
-
       <div className="add-farmer-form">
         <h3>{formData.id ? 'Edit Farmer' : 'Add Farmer'}</h3>
         <form onSubmit={handleSubmit}>
@@ -126,9 +126,10 @@ const navigate = useNavigate();
         </form>
       </div>
    
-  
-      <div className="farmer-list-container">   
-        <ul className="farmer-list-items">
+     <div>  {message && <div className="alert">{message}</div>} </div>
+      <div className="farmer-list-container">      
+        <ul className="farmer-list-items">     
+    
           {farmers.map((farmer => (
             <li key={farmer.id} className="farmer-list-item">
            
@@ -146,7 +147,9 @@ const navigate = useNavigate();
                  </div> 
             </li>
           )))}
+       
         </ul>
+    
       </div>
   
      

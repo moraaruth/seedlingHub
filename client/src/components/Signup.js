@@ -20,28 +20,8 @@ const Signup = (props) => {
       .then(farmers => setFarmers(farmers))
   }, []);
 
-
-  
-
-  // const handleChange = (event) => {
-  //   const { name, value } = event.target;
-  //   setState({ ...state, [name]: value });
-  // };
-
-  //   const handleErrors = () => {
-  //   return (
-  //     <div>
-  //       <ul>
-  //         {state.errors.map((error, index) => (
-  //           <li key={index}>{error}</li>
-  //         ))}
-  //       </ul>
-  //     </div>
-  //   );
-  // };
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const { username, email, password, password_confirmation } = state;
     let user = {
       username,
       email,
@@ -64,23 +44,7 @@ const Signup = (props) => {
       
       }
     });
-      // .then(response => response.json())
-      // .then(farmers => setFarmers(farmers))
-      // .then(data => {
 
-      //   props.handleLogin(data)
-      // })
-     
-      
-      // .then(data => {
-      //   if (data.status === 'created') {
-      //     props.handleLogin(data);
-      //     navigate('/farmer');
-      //   } else {
-      //     setState({ ...state, errors: data.errors });
-      //   }
-      // })
-      // .catch(error => console.log('api errors:', error));
   };
  
   return (
@@ -93,7 +57,7 @@ const Signup = (props) => {
               name="username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              // onChange={handleChange}
+         
             />
             <input
               placeholder="email"
@@ -101,7 +65,7 @@ const Signup = (props) => {
               name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              // onChange={handleChange}
+           
             />
             <input
               placeholder="password"
@@ -109,7 +73,7 @@ const Signup = (props) => {
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              // onChange={handleChange}
+         
             />
             <input
               placeholder="password confirmation"
@@ -117,14 +81,14 @@ const Signup = (props) => {
               name="password_confirmation"
               value={password_confirmation}
               onChange={(e) => setPassword_confirmation(e.target.value)}
-              // onChange={handleChange}
+          
             />
     
             <button placeholder="submit" type="submit">
               Sign Up
             </button>
           </form>
-          {/* {errors && handleErrors()} */}
+       
         </div>
       );
     };

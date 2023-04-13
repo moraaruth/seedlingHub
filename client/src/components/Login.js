@@ -30,23 +30,11 @@ const Login = ({ handleLogin }) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify({ farmer }),
+      body: JSON.stringify( farmer ),
     })
       .then((response) => response.json())
       navigate('/farmer')
-      // .then((data) => {
-      //   if (data.logged_in) {
-      //     handleLogin(data);
-      //     navigate('/farmer', { state: { farmer: data.farmer } }); 
-      //   } else {
-      //     setState({ errors: data.errors });
-      //     alert(data.errors)
-      //     setTimeout(() => {
-      //       window.location.reload();
-      //     }, 5000);
-      //   }
-      // })
-      // .catch((error) => console.log('api errors:', error));
+
   };
 
   const { username, email, password } = state;

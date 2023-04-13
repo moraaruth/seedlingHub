@@ -185,7 +185,7 @@ function App() {
       }
     };
     loginStatus();
-  }, []);
+  }, [isLoggedIn]);
 
   const handleLogin = (data) => {
     setIsLoggedIn(true);
