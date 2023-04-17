@@ -37,7 +37,7 @@ const Signup = (props) => {
       body: JSON.stringify( user ),
     })
     .then((r) => {
-      console.log(user)
+    
       navigate('/farmer');
       if (r.ok) {
         r.json().then((user) => setFarmers(user));

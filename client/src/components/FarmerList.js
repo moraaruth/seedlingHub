@@ -51,6 +51,7 @@ const navigate = useNavigate();
       .then(data => {
         if (method === 'POST') {
           setFarmers([...farmers, data]);
+          
         } else {
           setFarmers(prevFarmers => {
             const index = prevFarmers.findIndex(farmer => farmer.id === formData.id);
@@ -130,7 +131,8 @@ const navigate = useNavigate();
       <div className="farmer-list-container">      
         <ul className="farmer-list-items">     
     
-          {farmers.map((farmer => (
+        {Array.isArray(farmers) ? 
+      farmers.map((farmer => (
             <li key={farmer.id} className="farmer-list-item">
            
               <h3>{farmer.username}</h3>
@@ -146,7 +148,9 @@ const navigate = useNavigate();
 
                  </div> 
             </li>
-          )))}
+          ))):
+          <p>No farmers found.</p>
+          }
        
         </ul>
     

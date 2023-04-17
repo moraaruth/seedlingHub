@@ -2,7 +2,7 @@ class FarmersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
-  before_action :require_login, except: [:create]
+  # before_action :require_login, except: [:create, :index]
 
   def index
     farmers = Farmer.all
@@ -57,12 +57,9 @@ class FarmersController < ApplicationController
   end
 
 
-  def require_login
-    unless logged_in?
-      render json: {
-        status: 401,
-        errors: ['You must be logged in to access this section']
-      }
-    end
-  end
+  # def require_login
+  #   unless current_farmer
+  #     render json: { error: 'You must be logged in to access this section' }, status: :unauthorized
+  #   end
+  # end
 end

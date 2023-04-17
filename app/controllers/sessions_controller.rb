@@ -1,39 +1,38 @@
-
-require_dependency "sessions_controller"
-
 class SessionsController < ApplicationController
-#   def create
-#     @farmer = Farmer.find_by(username: session_params[:username])
+  # before_action :require_login, except: [:create]
 
-#     if @farmer && @farmer.authenticate(session_params[:password])
-#       login!
-#       render json: {
-#         logged_in: true,
-#         farmer: @farmer
-#       }
-#     else
-#       render json: { 
-#         status: 401,
-#         errors: ['no such farmer, please try again']
-#       }
-#     end
-# end
-def is_logged_in?
-    if logged_in? && current_farmer
+  def create
+    farmer = Farmer.find_by(username: session_params[:username])
+
+    if farmer&.authenticate(session_params[:password])
+      login!(farmer)
+      render json: {
+        logged_in: true,
+        farmer: farmer
+      }
+    else
+      render json: { 
+        status: 401,
+        errors: ['Invalid username or password']
+      }
+    end
+  end
+
+  def is_logged_in?
+    if logged_in?
       render json: {
         logged_in: true,
         farmer: current_farmer
       }
     else
       render json: {
-        logged_in: false,
-        message: 'no such farmer'
+        logged_in: false
       }
     end
-end
+  end
+
   def destroy
     logout!
-    session.clear
     render json: {
       status: 200,
       logged_out: true
@@ -46,7 +45,9 @@ end
     params.require(:farmer).permit(:username, :password)
   end
 
-  def current_farmer
-    @current_farmer ||= Farmer.find_by(id: session[:farmer_id])
+  def require_login
+    unless logged_in? && current_farmer.present?
+      render json: { status: 401, errors: ['You must be logged in to access this section'] }
+    end
   end
 end

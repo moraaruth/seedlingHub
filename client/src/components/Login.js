@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
 const Login = ({ handleLogin }) => {
+  const [farmers, setFarmers] = useState([]);
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -18,11 +19,11 @@ const Login = ({ handleLogin }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { username, email, password } = state;
-    const farmer = {
-      username: username,
-      email: email,
-      password: password,
+    let user = {
+      username,
+      email,
+      password,
+      password_confirmation,
     };
     fetch('/login', {
       method: 'POST',
@@ -30,14 +31,25 @@ const Login = ({ handleLogin }) => {
         'Content-Type': 'application/json',
       },
       credentials: 'include',
-      body: JSON.stringify( farmer ),
+      body: JSON.stringify(user),
+     
     })
-      .then((response) => response.json())
-      navigate('/farmer')
+    .then(() => navigate('/farmer'))
+      // .then((response) => response.json())
+      // // navigate('/farmer')
+      // .then((r) => {
+      //   console.log(user)
+      //   navigate('/farmer');
+      //   // if (r.ok) {
+      //   //   r.json().then((user) => setFarmers(user));
+        
+      //   // }
+      // });
+     
 
   };
 
-  const { username, email, password } = state;
+   const { username, email, password, password_confirmation } = state;
 
   return (
     <div className="login-container">

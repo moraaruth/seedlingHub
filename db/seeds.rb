@@ -23,7 +23,7 @@ require 'faker'
   )
 end
 # Create 5 farmers
-2.times do
+5.times do
   Farmer.create(
     username: Faker::Name.unique.first_name,
     email: Faker::Internet.unique.email,
