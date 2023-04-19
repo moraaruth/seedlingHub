@@ -163,54 +163,26 @@ function App() {
       }
       ];
       
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [farmer, setFarmer] = useState({});
+  const [farmer, setFarmer] = useState(null);
 
+   useEffect (() => {
+     fetch("/me").then((r) => {
+       if (r.ok){
+         r.json().then((farmer) => setFarmer(farmer));
+        
+       }
+     })
+   }, []);
 
-  useEffect(() => {
-    const loginStatus = async () => {
-      try {
-        const response = await fetch('/logged_in', { 
-          method: 'GET',
-          credentials: 'include'
-        });
-        const data = await response.json();
-        if (data.logged_in) {
-          handleLogin(data);
-        } else {
-          handleLogout();
-        }
-      } catch (error) {
-        console.log('api errors:', error);
-      }
-    };
-    loginStatus();
-  }, [isLoggedIn]);
-
-  const handleLogin = (data) => {
-    setIsLoggedIn(true);
-    setFarmer(data.farmer);
-    alert('Logged In successfully')
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setFarmer({});
-  };
-
-
-
-  return (
- 
-    <div>
-    
+  return ( 
+    <div>    
     <BrowserRouter>
     <Navbar />
         <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='/login' element={<Login handleLogin={handleLogin} />} />
-          <Route exact path='/signup' element={<Signup handleLogin={handleLogin} />} />
-          <Route exact path="/farmer" element={<FarmersPage farmer ={farmer} />} />
+          <Route exact path='/' element={<Home farmer={farmer}/>} />
+          <Route exact path='/login' element={<Login setFarmer={setFarmer} />} />
+          <Route exact path='/signup' element={<Signup setFarmer={setFarmer} />} />
+          <Route exact path="/farmer" element={<FarmersPage />} />
           <Route path="/farmer/:id/seedlings" element={<SeedlingList seedlings={seedlingList} />} /> 
 
 

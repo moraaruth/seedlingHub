@@ -1,5 +1,5 @@
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/debug-1.7.2/ext/debug
-/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230330-5202-12m6b8d.rb extconf.rb
+/usr/share/rvm/rubies/ruby-2.7.4/bin/ruby -I /usr/share/rvm/rubies/ruby-2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-11329-e0i7nf.rb extconf.rb
 creating Makefile
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/debug-1.7.2/ext/debug
@@ -13,4 +13,4 @@ linking shared-object debug/debug.so
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/debug-1.7.2/ext/debug
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 debug.so ./.gem.20230330-5202-1rmdncy/debug
+/usr/bin/install -m 0755 debug.so ./.gem.20230418-11329-x80f1p/debug

@@ -1,5 +1,5 @@
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/date-3.3.3/ext/date
-/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230330-5202-yq9qwx.rb extconf.rb
+/usr/share/rvm/rubies/ruby-2.7.4/bin/ruby -I /usr/share/rvm/rubies/ruby-2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-11329-earm4n.rb extconf.rb
 checking for rb_category_warn()... no
 checking for timezone in time.h with  -Werror... yes
 checking for altzone in time.h with  -Werror... no
@@ -18,4 +18,4 @@ linking shared-object date_core.so
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/date-3.3.3/ext/date
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 date_core.so ./.gem.20230330-5202-137x4j
+/usr/bin/install -m 0755 date_core.so ./.gem.20230418-11329-to2zfi

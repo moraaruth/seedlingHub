@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-      # before_action :require_login
+   
       skip_before_action :verify_authenticity_token
       helper_method :login!, :logged_in?, :current_farmer, :authorized_farmer?, :logout!, :set_farmer
     
@@ -8,24 +8,23 @@ class ApplicationController < ActionController::Base
     
                           
                           
-       def login!(farmer)
-            session[:farmer_id] = farmer.id
+       def login!
+          session[:farmer_id] = @farmer.id
       end
                             
     
       def logged_in?
-        !!current_farmer
+        !!session[:farmer_id]
       end
+
       def 
-            current_farmer
-            @current_farmer ||= Farmer.find_by(id: session[:farmer_id])
-            puts "Current farmer ID: #{session[:farmer_id]}"
-      end
-          
+          current_farmer
+          @current_farmer ||= Farmer.find(session[:farmer_id]) if session[:farmer_id]
+         
+      end          
     
-      def require_login
-            puts "Current farmer: #{current_farmer.inspect}"
-            @farmer == current_farmer
+      def authorized_farmer?
+           @farmer == current_farmer
       end
           
     

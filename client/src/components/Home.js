@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import FarmerList from './FarmerList';
+import {useNavigate } from 'react-router-dom';
 import './style.css';
 
-function Home() {
+function Home({farmer}) {
+  const navigate = useNavigate(); 
   const containerStyle = {
     display: 'flex',
     alignItems: 'center',
@@ -44,8 +47,29 @@ function Home() {
     borderRadius: '5px',
    
   };
+  if (farmer){
 
   return (
+    <>
+    <FarmerList />
+    <h1  className="logout-button" onClick={() => {
+            fetch("/logout",{
+                method: 'POST',
+                // credentials: 'include',
+            })
+            .then(response => response.json())
+            .then((data) => {
+                console.log(data);
+                navigate('/login');
+
+            })
+           }}>Logout</h1>
+
+    </>
+  );
+  } else {
+    return (
+      <>
     <div style={containerStyle}>
       <div>
         <h1 style={headingStyle}>Welcome to your favorite seedling marketplace</h1>
@@ -56,7 +80,10 @@ function Home() {
         <Link to='/signup' style={linkStyle}>Sign Up</Link>
       </div>
     </div>
+    </>
+
   );
+    }
 }
 
 export default Home;

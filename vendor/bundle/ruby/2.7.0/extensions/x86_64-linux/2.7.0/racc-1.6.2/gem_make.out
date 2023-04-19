@@ -1,5 +1,5 @@
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
-/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230330-5202-hfz8qo.rb extconf.rb
+/usr/share/rvm/rubies/ruby-2.7.4/bin/ruby -I /usr/share/rvm/rubies/ruby-2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-10837-usayw.rb extconf.rb
 checking for rb_block_call()... yes
 checking for rb_ary_subseq()... yes
 creating Makefile
@@ -14,4 +14,4 @@ linking shared-object racc/cparse.so
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/racc-1.6.2/ext/racc/cparse
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 cparse.so ./.gem.20230330-5202-win5g9/racc
+/usr/bin/install -m 0755 cparse.so ./.gem.20230418-10837-cezo98/racc

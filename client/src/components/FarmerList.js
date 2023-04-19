@@ -129,9 +129,12 @@ const navigate = useNavigate();
    
      <div>  {message && <div className="alert">{message}</div>} </div>
       <div className="farmer-list-container">      
-        <ul className="farmer-list-items">     
-    
+        <ul className="farmer-list-items">    
+
+       
+
         {Array.isArray(farmers) ? 
+       
       farmers.map((farmer => (
             <li key={farmer.id} className="farmer-list-item">
            

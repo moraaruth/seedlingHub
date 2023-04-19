@@ -1,5 +1,5 @@
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.18/ext/mri
-/usr/bin/ruby2.7 -I /usr/lib/ruby/2.7.0 -r ./siteconf20230330-7471-13iosfc.rb extconf.rb
+/usr/share/rvm/rubies/ruby-2.7.4/bin/ruby -I /usr/share/rvm/rubies/ruby-2.7.4/lib/ruby/2.7.0 -r ./siteconf20230418-11329-17eocx9.rb extconf.rb
 creating Makefile
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.18/ext/mri
@@ -9,14 +9,14 @@ current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/r
 make "DESTDIR="
 compiling bcrypt_ext.c
 compiling crypt_blowfish.c
+gcc  -D__SKIP_GNU     -c -o x86.o x86.S
 compiling crypt_gensalt.c
 compiling wrapper.c
 wrapper.c:182:60: warning: ‘struct crypt_data’ declared inside parameter list will not be visible outside of this definition or declaration
   182 | char *crypt_r(const char *key, const char *setting, struct crypt_data *data)
       |                                                            ^~~~~~~~~~
-gcc  -D__SKIP_GNU -Wdate-time -D_FORTIFY_SOURCE=2    -c -o x86.o x86.S
 linking shared-object bcrypt_ext.so
 
 current directory: /home/ruth/Development/code/rails/seedlingHub/vendor/bundle/ruby/2.7.0/gems/bcrypt-3.1.18/ext/mri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20230330-7471-4jesnw
+/usr/bin/install -m 0755 bcrypt_ext.so ./.gem.20230418-11329-v4dhhg

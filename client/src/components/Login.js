@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './style.css';
 
-const Login = ({ handleLogin }) => {
-  const [farmers, setFarmers] = useState([]);
+const Login = ({ setFarmer }) => {
+
   const [state, setState] = useState({
     username: '',
     password: '',
@@ -30,23 +30,13 @@ const Login = ({ handleLogin }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'include',
-      body: JSON.stringify(user),
+           body: JSON.stringify(user),
      
     })
-    .then(() => navigate('/farmer'))
-      // .then((response) => response.json())
-      // // navigate('/farmer')
-      // .then((r) => {
-      //   console.log(user)
-      //   navigate('/farmer');
-      //   // if (r.ok) {
-      //   //   r.json().then((user) => setFarmers(user));
-        
-      //   // }
-      // });
-     
-
+  
+      .then((response) => response.json())
+      .then((farmer) => setFarmer(farmer))
+      navigate('/farmer')
   };
 
    const { username, email, password, password_confirmation } = state;
