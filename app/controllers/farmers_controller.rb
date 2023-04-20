@@ -44,6 +44,7 @@ class FarmersController < ApplicationController
     head :no_content
   end
 
+
   private
 
   def render_not_found_response
@@ -63,4 +64,6 @@ class FarmersController < ApplicationController
   def logged_in?
     !!session[:farmer_id]
   end
+
+
 end
